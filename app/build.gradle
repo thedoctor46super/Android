@@ -20,6 +20,10 @@ android {
 }
 
 
+
+
+
+
 dependencies {
     compile('com.mikepenz:materialdrawer:5.2.2@aar') {
         transitive = true
@@ -29,4 +33,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
 }

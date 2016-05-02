@@ -19,6 +19,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int homeId = 1;
+    public static final int mapId = 2;
+    public static final int loginId = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +36,24 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
+                openMapActivity();
             }
         });
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.app_name);
-        SecondaryDrawerItem item2 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName(R.string.action_menu);
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem()
+                .withName(R.string.action_home)
+                .withIcon(R.drawable.ic_home_24dp)
+                .withIdentifier(homeId);
+        DividerDrawerItem item2 = new DividerDrawerItem();
+        SecondaryDrawerItem item3 = (SecondaryDrawerItem) new SecondaryDrawerItem()
+                .withName(R.string.action_login)
+                .withIcon(R.drawable.ic_face_24dp)
+                .withIdentifier(loginId);
+        SecondaryDrawerItem item4 = (SecondaryDrawerItem) new SecondaryDrawerItem()
+                .withName(R.string.action_map)
+                .withIcon(R.drawable.ic_map_24dp)
+                .withIdentifier(mapId);
 
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
@@ -47,14 +61,29 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .addDrawerItems(
                         item1,
-                        new DividerDrawerItem(),
                         item2,
-                        new SecondaryDrawerItem().withName(R.string.action_login)
+                        item3,
+                        item4
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
+
+                        int itemId = (int)drawerItem.getIdentifier();
+
+                        switch(itemId) {
+                            case homeId:
+                                openMainActivity();
+                                break;
+                            case loginId:
+                                openLoginActivity();
+                                break;
+                            case mapId:
+                                openMapActivity();
+                                break;
+
+                        }
                         return true;
                     }
                 })
@@ -75,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "TODO: Show Login!", Toast.LENGTH_LONG).show();
+                openLoginActivity();
             }
         });
 
@@ -84,6 +113,22 @@ public class MainActivity extends AppCompatActivity {
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(false);
         mActionBar.setHomeButtonEnabled(false);
+    }
+
+    public void openMapActivity() {
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLoginActivity() {
+        //Toast.makeText(MainActivity.this, "TODO: Show Login!", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+        startActivity(intent);
     }
 
 
