@@ -2,15 +2,10 @@ package com.maurizio.androidgit;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.AppCompatDialogFragment;
-import android.support.v7.app.MediaRouteDiscoveryFragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,13 +19,11 @@ import android.view.MenuItem;
 import layout.CalendarFragment;
 import layout.LoginFragment;
 import layout.MapFragment;
-import layout.PlusOneFragment;
 
 public class NavigationActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         LoginFragment.OnFragmentInteractionListener,
         MapFragment.OnFragmentInteractionListener,
-        PlusOneFragment.OnFragmentInteractionListener,
         CalendarFragment.OnFragmentInteractionListener {
 
     @Override
@@ -41,6 +34,7 @@ public class NavigationActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,16 +46,19 @@ public class NavigationActivity extends AppCompatActivity implements
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        assert drawer != null;
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -84,8 +81,11 @@ public class NavigationActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_login) {
+            Fragment fragment = new LoginFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame, fragment);
+            ft.commit();
         }
 
         return super.onOptionsItemSelected(item);
@@ -100,14 +100,13 @@ public class NavigationActivity extends AppCompatActivity implements
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
             fragment = new LoginFragment();
         } else if (id == R.id.nav_map) {
             fragment = new MapFragment();
         } else if (id == R.id.nav_calendar) {
-
+            fragment = new CalendarFragment();
         } else if (id == R.id.nav_share) {
-            fragment = new PlusOneFragment();
+
         } else if (id == R.id.nav_send) {
 
         }
@@ -116,6 +115,7 @@ public class NavigationActivity extends AppCompatActivity implements
         ft.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

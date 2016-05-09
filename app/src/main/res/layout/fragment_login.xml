@@ -5,24 +5,11 @@
     tools:context="layout.LoginFragment">
 
 
-    <MultiAutoCompleteTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New MultiAutoCompleteTextView"
-        android:id="@+id/multiAutoCompleteTextView"
-        android:layout_gravity="center" />
-
-    <QuickContactBadge
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quickContactBadge"
-        android:layout_gravity="center_horizontal|top" />
-
-    <MediaController
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mediaController"
-        android:layout_gravity="center_horizontal|bottom" />
-
+        android:text="TODO: Login View"
+        android:id="@+id/textView2"
+        android:layout_gravity="left|center_vertical" />
 
 </FrameLayout>
