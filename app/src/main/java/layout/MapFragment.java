@@ -181,22 +181,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         final Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         if (location != null)
         {
-
-            //Toast.makeText(MapsActivity.this, "Started!! Your location: " + location.getLatitude() + " - " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
                     .zoom(14)                   // Sets the zoom
-                            //.bearing(0)                // Sets the orientation of the camera to east
-                            //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                    //.bearing(0)                // Sets the orientation of the camera to east
+                    //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
 
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 2500, new GoogleMap.CancelableCallback() {
                 @Override
                 public void onFinish() {
-                    //Toast.makeText(MapsActivity.this, "Finished!!", Toast.LENGTH_LONG).show();
-
-
                     BitmapDescriptor icon1 = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
                     BitmapDescriptor icon2 = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
                     BitmapDescriptor icon3 = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
@@ -218,7 +212,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                 @Override
                 public void onCancel() {
-                    //Toast.makeText(MapsActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+
                 }
             });
 

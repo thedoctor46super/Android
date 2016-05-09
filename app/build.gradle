@@ -24,6 +24,7 @@ android {
 
 
 
+
 dependencies {
     compile('com.mikepenz:materialdrawer:5.2.2@aar') {
         transitive = true
