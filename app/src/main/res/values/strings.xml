@@ -12,8 +12,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="landing_fragment">Landing fragment</string>
 
     <string name="menu_profile">Profile</string>
     <string name="menu_map">Map</string>

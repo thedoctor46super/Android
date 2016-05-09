@@ -17,11 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import layout.CalendarFragment;
+import layout.LandingFragment;
 import layout.LoginFragment;
 import layout.MapFragment;
 
 public class NavigationActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
+        LandingFragment.OnFragmentInteractionListener,
         LoginFragment.OnFragmentInteractionListener,
         MapFragment.OnFragmentInteractionListener,
         CalendarFragment.OnFragmentInteractionListener {
@@ -53,6 +55,11 @@ public class NavigationActivity extends AppCompatActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new LandingFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.mainFrame, fragment);
+        ft.commit();
     }
 
     @Override
