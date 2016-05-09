@@ -62,7 +62,11 @@ public class NavigationActivity extends AppCompatActivity implements
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -84,7 +88,7 @@ public class NavigationActivity extends AppCompatActivity implements
         if (id == R.id.action_login) {
             Fragment fragment = new LoginFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainFrame, fragment);
+            ft.replace(R.id.mainFrame, fragment).addToBackStack(null);
             ft.commit();
         }
 
@@ -111,7 +115,7 @@ public class NavigationActivity extends AppCompatActivity implements
 
         }
 
-        ft.replace(R.id.mainFrame, fragment);
+        ft.replace(R.id.mainFrame, fragment).addToBackStack(null);
         ft.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
